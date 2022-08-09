@@ -1,9 +1,12 @@
 pipeline {
   agent any
+  tools{
+    go 'go_lang'
+  }
   stages {
     stage('dev') {
       steps {
-        sh 'go test ./...'
+        bat 'go version'
       }
     }
 
