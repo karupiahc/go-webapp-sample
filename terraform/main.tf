@@ -33,16 +33,17 @@ resource "aws_instance" "jenkins_server" {
   }
   user_data            = <<EOF
 #!/bin/bash
-sleep 30
-sudo apt update -y
-sudo apt install openjdk-17-jre
-sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+apt update -y
+apt install openjdk-17-jre -y
+wget -O /usr/share/keyrings/jenkins-keyring.asc \
     https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
 echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
     https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
     /etc/apt/sources.list.d/jenkins.list > /dev/null
-sudo apt-get update -y 
-sudo apt-get install jenkins
+apt-get update -y 
+apt-get install jenkins -y
+systemctl start jenkins
+systemctl enable jenkins
 EOF
   iam_instance_profile = aws_iam_instance_profile.ec2_bucket_profile.name
 }
@@ -166,6 +167,10 @@ resource "aws_key_pair" "key" {
 # Outputs
 #####################################
 
-output "jenkins_server_ip" {
+output "Jenkins_web_access" {
   value = "${aws_instance.jenkins_server.public_ip}:8080"
+}
+
+output "Jenkins_ssh_access" {
+  value = "ssh ubuntu@${aws_instance.jenkins_server.public_ip}"
 }
