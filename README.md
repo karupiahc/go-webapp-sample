@@ -19,7 +19,7 @@ If you would like to develop a web application using golang, please feel free to
 
 ## Install
 Perform the following steps:
-1. Download and install [MinGW(gcc)](https://sourceforge.net/projects/mingw-w64/files/?source=navbar).
+1. Download and install [MinGW(gcc)](https://sourceforge.net/projects/mingw-w64/files/?source=navbar) or [TDM-GCC (Windows)](https://jmeubank.github.io/tdm-gcc/download/).
 1. Download and install [Visual Studio Code(VS Code)](https://code.visualstudio.com/).
 1. Download and install [Golang](https://golang.org/).
 1. Get the source code of this repository by the following command.
